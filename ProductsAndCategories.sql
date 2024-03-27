@@ -1,18 +1,18 @@
--- Таблица продуктов
+-- РўР°Р±Р»РёС†Р° РїСЂРѕРґСѓРєС‚РѕРІ
 CREATE TABLE Products (
     Id INT PRIMARY KEY,
     Name NVARCHAR(100),
     OtherData TEXT
 );
 
--- таблица категорий
+-- РўР°Р±Р»РёС†Р° РєР°С‚РµРіРѕСЂРёР№
 CREATE TABLE Categories (
     Id INT PRIMARY KEY,
     Name NVARCHAR(100),
     OtherData TEXT
 );
 
--- Таблица для связи продуктов и категорий (отношение многие ко многим)
+-- РўР°Р±Р»РёС†Р° РґР»СЏ СЃРІСЏР·Рё РїСЂРѕРґСѓРєС‚РѕРІ Рё РєР°С‚РµРіРѕСЂРёР№ (РѕС‚РЅРѕС€РµРЅРёРµ РјРЅРѕРіРёРµ РєРѕ РјРЅРѕРіРёРј)
 CREATE TABLE ProductCategory (
     ProductId INT,
     CategoryId INT,
@@ -21,8 +21,8 @@ CREATE TABLE ProductCategory (
     FOREIGN KEY (CategoryId) REFERENCES Categories(Id)
 );
 
--- запрос для выбора всех пар «Имя продукта – Имя категории»
-SELECT p.Name AS 'Имя продукта', ISNULL(c.Name, '-') AS 'Имя категории'
+-- Р·Р°РїСЂРѕСЃ РґР»СЏ РІС‹Р±РѕСЂР° РІСЃРµС… РїР°СЂ В«РРјСЏ РїСЂРѕРґСѓРєС‚Р° вЂ“ РРјСЏ РєР°С‚РµРіРѕСЂРёРёВ»
+SELECT p.Name AS 'РРјСЏ РїСЂРѕРґСѓРєС‚Р°', ISNULL(c.Name, '-') AS 'РРјСЏ РєР°С‚РµРіРѕСЂРёРё'
 FROM Products p
 LEFT JOIN ProductCategory pc ON p.Id = pc.ProductId
 LEFT JOIN Categories c ON pc.CategoryId = c.Id;
